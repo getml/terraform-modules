@@ -42,6 +42,7 @@ module "new_topics" {
     {
       name = "default-subscription"
     }
+  ]
 }
 
 resource "google_cloudfunctions2_function" "function" {
