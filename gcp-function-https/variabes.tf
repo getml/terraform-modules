@@ -168,12 +168,16 @@ EOD
   default = null
 }
 
-variable "new_pubsub_topic" {
-  type = string
+variable "new_pubsub_topics" {
+  type = list(string)
   validation {
-    condition     = can(regex("^[a-zA-Z0-9_-]{1,255}$", var.new_pubsub_topic))
-    error_message = "The function_name must be a string of alphanumeric, hyphen, and underscore characters, and upto 255 characters in length."
+    condition = alltrue([
+      for topic in var.new_pubsub_topics :
+      can(regex("^[a-zA-Z0-9_-]{1,255}$", topic))
+    ])
+
+    error_message = "Each topic name must be a string of alphanumeric, hyphen, and underscore characters, and up to 255 characters in length."
   }
   description = "The name of the Pub/Sub topic to which messages will be published. Default is to create no topic."
-  default = null
+  default = []
 }

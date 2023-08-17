@@ -20,7 +20,7 @@ module "cloud-function-and-topic" {
   runtime        = "python311"
   available_memory = "256Mi"
   roles          = ["roles/datastore.user", "roles/pubsub.viewer", "roles/pubsub.publisher", "roles/secretmanager.secretAccessor"]
-  new_pubsub_topic = "cobi-incoming-messages"
+  new_pubsub_topics = ["cobi-incoming-messages"]
 }
 ```
 
@@ -41,7 +41,7 @@ module "cloud-function-and-topic" {
 | invokers                       | The list of members that can invoke the function. Include allUsers to make the function public.                                                                                 | list(string) | []        | NO       |
 | max_instance_count             | The limit on the maximum number of function instances that may coexist at a given time.                                                                                         | number       | 1         | NO       |
 | min_instance_count             | The limit on the minimum number of function instances that may coexist at a given time.                                                                                         | number       | 0         | NO       |
-| new_pubsub_topic               | The name of the Pub/Sub topic to which messages will be published. Default is to create no topic.                                                                               | string       | null      | NO       |
+| new_pubsub_topics              | The names of the Pub/Sub topics. Default is to create no topic.                                                                                                                 | list(string) | []        | NO       |
 | roles                          | The list of roles to assign to the service account that the Cloud Function will use.                                                                                            | list(string) | []        | NO       |
 | timeout_seconds                | The function execution timeout. Execution is considered failed and can be terminated if the function is not completed at the end of the timeout period. Defaults to 60 seconds. | number       | 60        | NO       |
 | vpc_connector                  | The Serverless VPC Access connector that this cloud function can connect to.                                                                                                    | string       | null      | NO       |

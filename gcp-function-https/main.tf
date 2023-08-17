@@ -33,10 +33,10 @@ resource "google_project_iam_member" "sa-roles" {
   member = "serviceAccount:${google_service_account.sa.email}"
 }
 
-module "incoming_messages_topic" {
-  count = var.new_pubsub_topic != null ? 1 : 0
-  source  = "terraform-google-modules/pubsub/google"
-  topic      = var.new_pubsub_topic
+module "new_topics" {
+  source     = "terraform-google-modules/pubsub/google"
+  for_each   = toset(var.new_pubsub_topics)
+  topic      = each.value
   project_id = var.project_id
 }
 
