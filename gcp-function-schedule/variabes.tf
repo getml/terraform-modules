@@ -196,7 +196,7 @@ variable "schedule_retry_count" {
 variable "new_pubsub_topic" {
   type = string
   validation {
-    condition     = can(regex("^[a-zA-Z0-9_-]{1,255}$", var.function_name))
+    condition     = can(regex("^[a-zA-Z0-9_-]{1,255}$", var.new_pubsub_topic))
     error_message = "The function_name must be a string of alphanumeric, hyphen, and underscore characters, and upto 255 characters in length."
   }
   description = "The name of the Pub/Sub topic to which messages will be published. Default is to create no topic."
