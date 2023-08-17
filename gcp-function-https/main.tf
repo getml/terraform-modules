@@ -36,7 +36,7 @@ resource "google_project_iam_member" "sa-roles" {
 module "incoming_messages_topic" {
   count = var.new_pubsub_topic != null ? 1 : 0
   source  = "terraform-google-modules/pubsub/google"
-  topic      = var.pubsub_topic
+  topic      = var.new_pubsub_topic
   project_id = var.project_id
 }
 
