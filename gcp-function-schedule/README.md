@@ -1,4 +1,4 @@
-# GCP Cloud Function HTTPS Trigger
+# GCP Cloud Function Schedule Trigger
 
 Opinionated module to create a GCP 2nd gen Cloud Function, without  the need to create a separate zip file and
 upload it to GCS, and without the need to create a separate service account and manually assign roles to it.
@@ -11,16 +11,16 @@ and allow invocation by the members specified in `invokers` (if any).
 
 ```HCL
 module "cloud-function-scheduled" {
-  source         = "github.com/getml/terraform-modules/gcp-function-https"
-  entry_point    = "main"
-  function_name  = "cobi-slack-entrypoint"
-  function_path  = "../src"
-  project_id     = "c17-bot"
-  region         = "europe-west1"
-  runtime        = "python311"
-  available_memory = "256Mi"
-  roles          = ["roles/datastore.user", "roles/pubsub.viewer", "roles/pubsub.publisher", "roles/secretmanager.secretAccessor"]
-  new_pubsub_topic = "cobi-incoming-messages"
+  source            = "github.com/getml/terraform-modules/gcp-function-https"
+  entry_point       = "main"
+  function_name     = "cobi-slack-entrypoint"
+  function_path     = "../src"
+  project_id        = "c17-bot"
+  region            = "europe-west1"
+  runtime           = "python311"
+  available_memory  = "256Mi"
+  roles             = ["roles/datastore.user", "roles/pubsub.viewer", "roles/pubsub.publisher", "roles/secretmanager.secretAccessor"]
+  schedule          = "*/10 * * * *"
 }
 ```
 
