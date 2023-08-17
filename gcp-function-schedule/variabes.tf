@@ -72,7 +72,7 @@ variable "timeout_seconds" {
 variable "available_memory" {
   type = string
   default = "128Mi"
-  description = "The amount of memory available for a function. Defaults to 256M. Supported units are k, M, G, Mi, Gi. If no unit is supplied the value is interpreted as bytes."
+  description = "The amount of memory available for a function. Defaults to 128M. Supported units are k, M, G, Mi, Gi. If no unit is supplied the value is interpreted as bytes."
 }
 
 variable "all_traffic_on_latest_revision" {
@@ -166,6 +166,31 @@ variable "vpc_connector_egress_settings" {
 Allowed values are ALL_TRAFFIC and PRIVATE_RANGES_ONLY
 EOD
   default = null
+}
+
+variable "schedule" {
+  type = string
+  default = null
+}
+
+variable "schedule_description" {
+  type = string
+  default = ""
+}
+
+variable "schedule_timezone" {
+  type = string
+  default = "UTC"
+}
+
+variable "schedule_attempt_deadline" {
+  type = string
+  default = "320s"
+}
+
+variable "schedule_retry_count" {
+  type = number
+  default = 0
 }
 
 variable "new_pubsub_topic" {

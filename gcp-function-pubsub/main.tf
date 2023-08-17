@@ -34,7 +34,6 @@ resource "google_project_iam_member" "sa-roles" {
   member = "serviceAccount:${google_service_account.sa.email}"
 }
 
-
 resource "google_cloudfunctions2_function" "function" {
   name = var.function_name
   location = var.region
@@ -67,7 +66,7 @@ resource "google_cloudfunctions2_function" "function" {
   event_trigger {
     trigger_region = var.region
     event_type     = "google.cloud.pubsub.topic.v1.messagePublished"
-    pubsub_topic   = var.pubsub_topic
+    pubsub_topic   = "projects/${var.project_id}/topics/${var.pubsub_topic}"
     retry_policy   = "RETRY_POLICY_RETRY"
   }
 }
