@@ -38,6 +38,10 @@ module "new_topics" {
   for_each   = toset(var.new_pubsub_topics)
   topic      = each.value
   project_id = var.project_id
+  pull_subscriptions = [
+    {
+      name = "default-subscription"
+    }
 }
 
 resource "google_cloudfunctions2_function" "function" {
