@@ -100,6 +100,12 @@ For Node.js this is name of a function exported by the module specified in sourc
 variable "environment_variables" {
   type = map(string)
   default = {}
+  description = "User-provided environment variables for the function."
+}
+
+variable "build_environment_variables" {
+  type = map(string)
+  default = {}
   description = "User-provided build-time environment variables for the function."
 }
 

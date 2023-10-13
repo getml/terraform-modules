@@ -41,6 +41,7 @@ resource "google_cloudfunctions2_function" "function" {
   build_config {
     runtime = var.runtime
     entry_point = var.entry_point
+    environment_variables = var.build_environment_variables
 
     source {
       storage_source {
