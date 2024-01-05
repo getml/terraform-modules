@@ -81,6 +81,12 @@ variable "available_memory" {
   description = "The amount of memory available for a function. Defaults to 256M. Supported units are k, M, G, Mi, Gi. If no unit is supplied the value is interpreted as bytes."
 }
 
+variable "available_cpu" {
+  type = string
+  default = "4"
+  description = "The amount of CPU available for a function."
+}
+
 variable "all_traffic_on_latest_revision" {
   type = bool
   default = true

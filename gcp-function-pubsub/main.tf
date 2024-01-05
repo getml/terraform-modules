@@ -56,6 +56,7 @@ resource "google_cloudfunctions2_function" "function" {
     max_instance_count = var.max_instance_count
     timeout_seconds = var.timeout_seconds
     available_memory = var.available_memory
+    available_cpu = var.available_cpu
     all_traffic_on_latest_revision = var.all_traffic_on_latest_revision
     environment_variables = var.environment_variables
     ingress_settings = var.ingress_settings
