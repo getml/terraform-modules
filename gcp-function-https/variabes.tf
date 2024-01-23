@@ -75,6 +75,12 @@ variable "available_memory" {
   description = "The amount of memory available for a function. Defaults to 256M. Supported units are k, M, G, Mi, Gi. If no unit is supplied the value is interpreted as bytes."
 }
 
+variable "available_cpu" {
+  type = string
+  default = "4"
+  description = "The amount of CPU available for a function."
+}
+
 variable "all_traffic_on_latest_revision" {
   type = bool
   default = true
@@ -101,6 +107,18 @@ variable "max_instance_count" {
   type = number
   default = 1
   description = "The limit on the maximum number of function instances that may coexist at a given time."
+}
+
+variable "retry_policy" {
+  type = string
+  description = "The runtime in which to run the function."
+  validation {
+    condition = contains([
+      "RETRY_POLICY_UNSPECIFIED", 
+      "RETRY_POLICY_DO_NOT_RETRY", 
+      "RETRY_POLICY_RETRY"], var.retry_policy)
+    error_message = "Must be a valid retry policy. See https://cloud.google.com/functions/docs/reference/rpc/google.cloud.functions.v2alpha#google.cloud.functions.v2alpha.EventTrigger.RetryPolicy for a list of valid policies. In Jan '24, possible values are RETRY_POLICY_UNSPECIFIED, RETRY_POLICY_DO_NOT_RETRY, and RETRY_POLICY_RETRY."
+  }
 }
 
 variable "function_name" {

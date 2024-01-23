@@ -54,7 +54,7 @@ resource "google_cloudfunctions2_function" "function" {
     entry_point = var.entry_point
 
     source {
-      storage_source {
+      storage_source {julius.fischer@getml.com
         bucket = google_storage_bucket.function_bucket.name
         object = google_storage_bucket_object.zip.name
       }
@@ -66,12 +66,17 @@ resource "google_cloudfunctions2_function" "function" {
     max_instance_count = var.max_instance_count
     timeout_seconds = var.timeout_seconds
     available_memory = var.available_memory
+    available_cpu = var.available_cpu
     all_traffic_on_latest_revision = var.all_traffic_on_latest_revision
     environment_variables = var.environment_variables
     ingress_settings = var.ingress_settings
     vpc_connector = var.vpc_connector
     vpc_connector_egress_settings = var.vpc_connector_egress_settings
     service_account_email = google_service_account.sa.email
+  }
+
+  event_trigger {
+    retry_policy = "RETRY_POLICY_RETRY"
   }
 }
 
