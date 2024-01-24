@@ -76,7 +76,7 @@ resource "google_cloudfunctions2_function" "function" {
   }
 
   event_trigger {
-    retry_policy = "RETRY_POLICY_RETRY"
+    retry_policy = var.retry_policy
   }
 }
 
