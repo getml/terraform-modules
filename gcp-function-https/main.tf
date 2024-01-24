@@ -75,9 +75,6 @@ resource "google_cloudfunctions2_function" "function" {
     service_account_email = google_service_account.sa.email
   }
 
-  event_trigger {
-    retry_policy = var.retry_policy
-  }
 }
 
 data "google_iam_policy" "invoker" {
