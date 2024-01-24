@@ -65,10 +65,4 @@ resource "google_cloudfunctions2_function" "function" {
     service_account_email = google_service_account.sa.email
   }
 
-  event_trigger {
-    trigger_region = var.region
-    event_type     = "google.cloud.pubsub.topic.v1.messagePublished"
-    pubsub_topic   = "projects/${var.project_id}/topics/${var.pubsub_topic}"
-    retry_policy   = var.retry_policy
-  }
 }
