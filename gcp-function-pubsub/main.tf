@@ -34,15 +34,15 @@ resource "google_project_iam_member" "sa-roles" {
   member = "serviceAccount:${google_service_account.sa.email}"
 }
 
-resource "google_secret_manager_secret_iam_binding" "secret_dd_api_key" {
-  for_each = var.secret_environment_variables
-  secret_id = for_each.secret
-  role      = "roles/secretmanager.secretAccessor"
+#resource "google_secret_manager_secret_iam_binding" "secret_dd_api_key" {
+  #for_each = var.secret_environment_variables
+  #secret_id = each.secret
+  #role      = "roles/secretmanager.secretAccessor"
 
-  members = [
-    "serviceAccount:${google_service_account.service_account.email}"
-  ]
-}
+  #members = [
+    #"serviceAccount:${google_service_account.service_account.email}"
+  #]
+#}
 
 resource "google_cloudfunctions2_function" "function" {
   name = var.function_name
@@ -74,12 +74,14 @@ resource "google_cloudfunctions2_function" "function" {
     vpc_connector_egress_settings = var.vpc_connector_egress_settings
     service_account_email = google_service_account.sa.email
     
-    secret_environment_variables {
+    dynamic "secret_environment_variables" {
       for_each = var.secret_environment_variables
-      key = for_each.key
-      project_id = var.project_id
-      secret = for_each.secret
-      version = "latest"
+      content {
+        key = secret_environment_variables.value.key
+        project_id = var.project_id
+        secret = secret_environment_variables.value.secret
+        version = "latest"
+      }
     }
   }
 

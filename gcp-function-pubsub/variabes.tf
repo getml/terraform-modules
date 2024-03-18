@@ -113,7 +113,7 @@ variable "secret_environment_variables" {
   type = list(object({
     key = string
     secret = string
-  })
+  }))
   default = []
   description = "User-provided secrets as environment variables for the function."
 }
