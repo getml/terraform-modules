@@ -34,16 +34,6 @@ resource "google_project_iam_member" "sa-roles" {
   member = "serviceAccount:${google_service_account.sa.email}"
 }
 
-#resource "google_secret_manager_secret_iam_binding" "secret_dd_api_key" {
-  #for_each = var.secret_environment_variables
-  #secret_id = each.secret
-  #role      = "roles/secretmanager.secretAccessor"
-
-  #members = [
-    #"serviceAccount:${google_service_account.service_account.email}"
-  #]
-#}
-
 resource "google_cloudfunctions2_function" "function" {
   name = var.function_name
   location = var.region
