@@ -103,6 +103,15 @@ variable "environment_variables" {
   description = "User-provided build-time environment variables for the function."
 }
 
+variable "secret_environment_variables" {
+  type = list(object({
+    key = string
+    secret = string
+  }))
+  default = []
+  description = "User-provided secrets as environment variables for the function."
+}
+
 variable "max_instance_count" {
   type = number
   default = 1
