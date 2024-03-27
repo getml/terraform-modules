@@ -73,8 +73,17 @@ resource "google_cloudfunctions2_function" "function" {
     vpc_connector = var.vpc_connector
     vpc_connector_egress_settings = var.vpc_connector_egress_settings
     service_account_email = google_service_account.sa.email
-  }
 
+    dynamic "secret_environment_variables" {
+      for_each = var.secret_environment_variables
+      content {
+        key = secret_environment_variables.value.key
+        project_id = var.project_id
+        secret = secret_environment_variables.value.secret
+        version = "latest"
+      }
+    }
+  }
 }
 
 data "google_iam_policy" "invoker" {
