@@ -25,6 +25,7 @@ variable "runtime" {
       "nodejs14",
       "nodejs12",
       "nodejs10",
+      "python312",
       "python311",
       "python310",
       "python39",
